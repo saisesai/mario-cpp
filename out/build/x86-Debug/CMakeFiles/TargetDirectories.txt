@@ -1,0 +1,4 @@
+C:/Users/laosai_s/Desktop/SourceCode/C/src/mario/out/build/x86-Debug/CMakeFiles/mario.dir
+C:/Users/laosai_s/Desktop/SourceCode/C/src/mario/out/build/x86-Debug/CMakeFiles/engine.dir
+C:/Users/laosai_s/Desktop/SourceCode/C/src/mario/out/build/x86-Debug/CMakeFiles/edit_cache.dir
+C:/Users/laosai_s/Desktop/SourceCode/C/src/mario/out/build/x86-Debug/CMakeFiles/rebuild_cache.dir
