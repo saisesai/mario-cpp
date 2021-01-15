@@ -1,7 +1,9 @@
 #include "ShaderManager.h"
 
 #include <plog/Log.h>
-#include <cstring>
+#include <fstream>
+
+using namespace std;
 
 ShaderManager::ShaderManager()
 {
@@ -11,13 +13,18 @@ ShaderManager::~ShaderManager()
 {
 }
 
-GLuint ShaderManager::MakeShaderProgram(const char* vertexShaderSource, const char* fragmentShaderSource)
+GLuint ShaderManager::MakeShaderProgram(const char* shaderName)
 {
 	GLuint vertexID = 0;
 	GLuint fragmentID = 0;
 	GLuint shaderProgram = 0;
-	
 
+	string vs = readShaderSrc(shaderName, shaderType::VERTEX_SHADER);
+	string fs = readShaderSrc(shaderName, shaderType::FRAGMENT_SHADER);
+
+	const char* vertexShaderSource = vs.c_str();
+	const char* fragmentShaderSource = fs.c_str();
+	
 	PLOG(plog::info) << "Compile and link shaders...";
 
 	// 1. Load and compile the vertex shader
@@ -71,4 +78,29 @@ GLuint ShaderManager::MakeShaderProgram(const char* vertexShaderSource, const ch
 	PLOG(plog::info) << "create shader program successful!";
 
 	return shaderProgram;
+}
+
+string ShaderManager::readShaderSrc(string shaderName, shaderType type)
+{
+	string src;
+	string filePath = "";
+	if (type == shaderType::VERTEX_SHADER)
+	{
+		filePath = "./assets/shaders/" + shaderName + "/vertex.glsl";
+	}
+	else
+	{
+		filePath = "./assets/shaders/" + shaderName + "/fragment.glsl";
+	}
+	
+	ifstream fileStream(filePath, ios::in);
+
+	string line = "";
+	while (!fileStream.eof())
+	{
+		getline(fileStream, line);
+		src.append(line + "\n");
+	}
+
+	return src;
 }

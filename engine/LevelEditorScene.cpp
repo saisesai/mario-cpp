@@ -8,7 +8,7 @@
 LevelEditorScene::LevelEditorScene()
 {
 	PLOG(plog::info) << "initialize level editor scene...";
-	this->shaderPorgram = ShaderManager::MakeShaderProgram(this->vertexShaderSource, this->fragmentShaderSource);
+	this->shaderPorgram = ShaderManager::MakeShaderProgram("default");
 
 	// ===========================================
 	// Generate VAO, VBO, EBO and send them to GPU
