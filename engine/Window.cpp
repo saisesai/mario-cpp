@@ -97,6 +97,7 @@ void Window::init()
 	glfwSetMouseButtonCallback(this->glfwWindow, MouseListener::MouseButtonCallback);
 	glfwSetScrollCallback(this->glfwWindow, MouseListener::ScrollCallback);
 	glfwSetKeyCallback(this->glfwWindow, KeyboardListener::KeyCallback);
+	glfwSetFramebufferSizeCallback(this->glfwWindow, Window::frameBufferSizeCallback);
 
 	// Enable v-sync
 	glfwSwapInterval(1);
@@ -132,4 +133,9 @@ void Window::loop()
 		dt = endTime - beginTime;
 		beginTime = endTime;
 	}
+}
+
+void Window::frameBufferSizeCallback(GLFWwindow* window, int width, int height)
+{
+	glViewport(0, 0, width, height);
 }

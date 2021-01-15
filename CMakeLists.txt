@@ -20,7 +20,7 @@ add_library(engine SHARED
 "engine/Timer.h" "engine/Timer.cpp" 
 "engine/Scene.h"
 "engine/LevelEditorScene.h" "engine/LevelEditorScene.cpp" 
-"engine/LevelScene.h" "engine/LevelScene.cpp")
+"engine/LevelScene.h" "engine/LevelScene.cpp" "engine/ShaderManager.h" "engine/ShaderManager.cpp")
 target_include_directories(engine PUBLIC ${PLOG_INCLUDE_DIRS})
 target_link_libraries(engine PUBLIC GLEW::GLEW)
 target_link_libraries(engine PUBLIC glfw)

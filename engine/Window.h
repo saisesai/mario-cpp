@@ -21,6 +21,8 @@ public:
 
 	static Window* GetInstance();
 
+	static void frameBufferSizeCallback(GLFWwindow* window, int width, int height);
+
 	void Run();
 	void ChangeScene(int newScene);
 
