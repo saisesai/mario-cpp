@@ -1,5 +1,7 @@
 #include "LevelEditorScene.h"
+
 #include <plog/Log.h>
+#include <glm/glm.hpp>
 
 #include "Window.h"
 #include "ShaderManager.h"
@@ -8,12 +10,15 @@
 LevelEditorScene::LevelEditorScene()
 {
 	PLOG(plog::info) << "initialize level editor scene...";
+
+	// Create camera
+	this->camera = new Camera(glm::vec2(0.0f, 0.0f));
+
 	this->shaderPorgram = ShaderManager::MakeShaderProgram("default");
 
 	// ===========================================
 	// Generate VAO, VBO, EBO and send them to GPU
 	// ===========================================
-
 	// Create VAO
 	glGenVertexArrays(1, &this->VAO);
 	glBindVertexArray(this->VAO);
@@ -37,14 +42,10 @@ LevelEditorScene::LevelEditorScene()
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 
-	
-
 	// Unbind VAO and VBO
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
-
-	
 
 	// Bind program
 	glUseProgram(this->shaderPorgram);
@@ -52,6 +53,7 @@ LevelEditorScene::LevelEditorScene()
 
 LevelEditorScene::~LevelEditorScene()
 {
+	delete this->camera;
 	glBindVertexArray(this->VAO);
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
@@ -70,11 +72,15 @@ LevelEditorScene::~LevelEditorScene()
 
 void LevelEditorScene::Update(float dt)
 {
+	this->camera->Position.x -= dt * 50.0f;
+
+	ShaderManager::UploadMatrix4f(this->shaderPorgram, "uProjection", this->camera->GetProjectionMatrix());
+	ShaderManager::UploadMatrix4f(this->shaderPorgram, "uView", this->camera->GetViewMatrix());
+
 	// Bind the VAO and EBO that we are using
 	// IMPORTANT bind VAO first!
 	glBindVertexArray(this->VAO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->EBO);
-	
 
 	// Graw element
 	glDrawElements(GL_TRIANGLES, (sizeof(this->elementArray) / sizeof(unsigned int)), GL_UNSIGNED_INT, 0);

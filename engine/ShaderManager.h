@@ -1,8 +1,9 @@
 #ifndef SHADERMANAGER_H
 #define SHADERMANAGER_H
 
-#include <gl/glew.h>
 #include <string>
+#include <gl/glew.h>
+#include <glm/glm.hpp>
 
 using namespace std;
 
@@ -18,6 +19,7 @@ public:
 	~ShaderManager();
 
 	static GLuint MakeShaderProgram(const char* shaderName);
+	static void UploadMatrix4f(GLuint shaderProgram, const char* varName, glm::mat4 mat4);
 
 private:
 	static string readShaderSrc(string shaderName, shaderType type);

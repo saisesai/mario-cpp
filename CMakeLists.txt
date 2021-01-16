@@ -10,6 +10,7 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 find_package(GLEW REQUIRED)
 find_package(glfw3 CONFIG REQUIRED)
 find_path(PLOG_INCLUDE_DIRS "plog/Appenders/AndroidAppender.h")
+ find_package(glm CONFIG REQUIRED)
 
 add_library(engine SHARED
 "engine/Engine.h" "engine/Engine.cpp" 
@@ -20,10 +21,13 @@ add_library(engine SHARED
 "engine/Timer.h" "engine/Timer.cpp" 
 "engine/Scene.h"
 "engine/LevelEditorScene.h" "engine/LevelEditorScene.cpp" 
-"engine/LevelScene.h" "engine/LevelScene.cpp" "engine/ShaderManager.h" "engine/ShaderManager.cpp")
+"engine/LevelScene.h" "engine/LevelScene.cpp" 
+"engine/ShaderManager.h" "engine/ShaderManager.cpp" 
+"engine/Camera.h" "engine/Camera.cpp")
 target_include_directories(engine PUBLIC ${PLOG_INCLUDE_DIRS})
 target_link_libraries(engine PUBLIC GLEW::GLEW)
 target_link_libraries(engine PUBLIC glfw)
+ target_link_libraries(engine PUBLIC glm)
 
 add_executable (mario main.cpp)
 target_link_libraries(mario PRIVATE engine)

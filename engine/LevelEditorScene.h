@@ -2,6 +2,7 @@
 #define LEVELEDITORSCENE_H
 
 #include "Scene.h"
+#include "Camera.h"
 
 #include <gl/glew.h>
 
@@ -16,7 +17,18 @@ public:
 
 
 private:
+   Camera* camera;
+    ///*
+    float vertexArray[28] = {
+        // position         // color
+        0.0f, 100.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, // Top left
+        100.0f, 100.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, // Top right
+        100.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, // Bottom right
+        0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f // Bottom left
+    };
+    //*/
 
+   /*
     float vertexArray[28] = {
         // position         // color
         -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, // Top left
@@ -24,6 +36,7 @@ private:
         0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, // Bottom right
         -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f // Bottom left
     };
+   */
 
     // IMPORTANT: Must be in counter-clockwise order.
     /*

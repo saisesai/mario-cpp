@@ -9,7 +9,7 @@
       "cmakeCommandArgs": "",
       "buildCommandArgs": "",
       "ctestCommandArgs": "",
-      "cmakeToolchain": "C:/Users/laosai_s/Desktop/SourceCode/C/vcpkg/scripts/buildsystems/vcpkg.cmake",
+      "cmakeToolchain": "H:\\sourceCode\\C\\vcpkg\\scripts\\buildsystems\\vcpkg.cmake",
       "inheritEnvironments": [ "msvc_x86" ],
       "variables": []
     }

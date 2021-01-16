@@ -1,6 +1,7 @@
 #include "ShaderManager.h"
 
 #include <plog/Log.h>
+#include <glm/gtc/type_ptr.hpp>
 #include <fstream>
 
 using namespace std;
@@ -88,19 +89,22 @@ string ShaderManager::readShaderSrc(string shaderName, shaderType type)
 	{
 		filePath = "./assets/shaders/" + shaderName + "/vertex.glsl";
 	}
-	else
+	else if (type == shaderType::FRAGMENT_SHADER)
 	{
 		filePath = "./assets/shaders/" + shaderName + "/fragment.glsl";
 	}
-	
 	ifstream fileStream(filePath, ios::in);
-
 	string line = "";
 	while (!fileStream.eof())
 	{
 		getline(fileStream, line);
 		src.append(line + "\n");
 	}
-
 	return src;
+}
+
+void ShaderManager::UploadMatrix4f(GLuint shaderProgram, const char* varName ,glm::mat4 mat4)
+{
+	GLint varLocation = glGetUniformLocation(shaderProgram, varName);
+	glUniformMatrix4fv(varLocation, 1, GL_FALSE, glm::value_ptr(mat4));
 }
