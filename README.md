@@ -13,7 +13,7 @@
    - glm
    - plog
 
-4. python3 (help to build project)
+4. python3 (Aid to build the project)
 
 ## Videos and author
 
