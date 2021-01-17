@@ -12,6 +12,7 @@
    - glew
    - glm
    - plog
+   - stb
 
 4. python3 (Aid to build the project)
 

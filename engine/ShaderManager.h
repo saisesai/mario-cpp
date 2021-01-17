@@ -25,6 +25,8 @@ public:
 	static void UploadVector3f(GLuint shaderProgram, const char* varName, glm::vec3 vec3);
 	static void UploadVector2f(GLuint shaderProgram, const char* varName, glm::vec2 vec2);
 	static void UploadFloat(GLuint shaderProgram, const char* varName, float var);
+	static void UploadInt(GLuint shaderProgram, const char* varName, int var);
+	static void UploadTexture(GLuint shaderProgram, const char* textureName, int slot);
 
 private:
 	static string readShaderSrc(string shaderName, shaderType type);

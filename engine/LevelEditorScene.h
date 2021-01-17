@@ -19,12 +19,12 @@ public:
 private:
    Camera* camera;
     ///*
-    float vertexArray[28] = {
-        // position         // color
-        0.0f, 100.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, // Top left
-        100.0f, 100.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, // Top right
-        100.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, // Bottom right
-        0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f // Bottom left
+    float vertexArray[36] = {
+        // position x3        // color x4             // texure x2
+        0.0f, 100.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, // Top left
+        100.0f, 100.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, // Top right
+        100.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, // Bottom right
+        0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f // Bottom left
     };
     //*/
 
@@ -51,6 +51,7 @@ private:
     };
 
 	GLuint shaderPorgram;
+    GLuint texture;
 	GLuint VAO, VBO, EBO;
 };
 

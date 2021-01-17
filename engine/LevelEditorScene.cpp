@@ -7,6 +7,7 @@
 #include "Timer.h"
 #include "ShaderManager.h"
 #include "KeyboardListener.h"
+#include "TextureManager.h"
 
 LevelEditorScene::LevelEditorScene()
 {
@@ -16,6 +17,7 @@ LevelEditorScene::LevelEditorScene()
 	this->camera = new Camera(glm::vec2(0.0f, 0.0f));
 
 	this->shaderPorgram = ShaderManager::MakeShaderProgram("default");
+	this->texture = TextureManger::MakeTexture("Natsuki.png");
 
 	// ===========================================
 	// Generate VAO, VBO, EBO and send them to GPU
@@ -37,11 +39,15 @@ LevelEditorScene::LevelEditorScene()
 	// Add the vertex attribute pointers
 	int positionSize = 3;
 	int colorSize = 4;
-	int vertexSizeBytes = (positionSize + colorSize) * sizeof(float);
+	int textureCoodsSize = 2;
+	int vertexSizeBytes = (positionSize + colorSize + textureCoodsSize) * sizeof(float);
 	glVertexAttribPointer(0, positionSize, GL_FLOAT, GL_FALSE, vertexSizeBytes, (void*)0);
 	glVertexAttribPointer(1, colorSize, GL_FLOAT, GL_FALSE, vertexSizeBytes, (void*)(positionSize * sizeof(float)));
+	glVertexAttribPointer(2, textureCoodsSize, GL_FLOAT, GL_FALSE, vertexSizeBytes,
+		(void*)((positionSize + colorSize) * sizeof(float)));
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
+	glEnableVertexAttribArray(2);
 
 	// Unbind VAO and VBO
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -67,6 +73,9 @@ LevelEditorScene::~LevelEditorScene()
 
 	glDeleteVertexArrays(1, &this->VAO);
 
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glDeleteTextures(1, &this->texture);
+
 	glUseProgram(0);
 	glDeleteProgram(this->shaderPorgram);
 }
@@ -80,6 +89,10 @@ void LevelEditorScene::Update(float dt)
 	ShaderManager::UploadMatrix4f(this->shaderPorgram, "uView", this->camera->GetViewMatrix());
 	ShaderManager::UploadFloat(this->shaderPorgram, "uTime", Timer::GetInstance()->GetTime());
 
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, this->texture);
+	ShaderManager::UploadTexture(this->shaderPorgram, "tex1", 0);
+
 	// Bind the VAO and EBO that we are using
 	// IMPORTANT bind VAO first!
 	glBindVertexArray(this->VAO);
@@ -90,5 +103,6 @@ void LevelEditorScene::Update(float dt)
 
 	// Unbind the VAO and EBO
 	glBindVertexArray(0);
+	glBindTexture(GL_TEXTURE_2D, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }

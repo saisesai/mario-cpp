@@ -138,3 +138,15 @@ void ShaderManager::UploadFloat(GLuint shaderProgram, const char* varName, float
 	GLint varLocation = glGetUniformLocation(shaderProgram, varName);
 	glUniform1f(varLocation, var);
 }
+
+void ShaderManager::UploadInt(GLuint shaderProgram, const char* varName, int var)
+{
+	GLint varLocation = glGetUniformLocation(shaderProgram, varName);
+	glUniform1i(varLocation, var);
+}
+
+void ShaderManager::UploadTexture(GLuint shaderProgram, const char* textureName, int slot)
+{
+	GLint varLocation = glGetUniformLocation(shaderProgram, textureName);
+	glUniform1i(varLocation, slot);
+}

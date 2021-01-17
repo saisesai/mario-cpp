@@ -1,13 +1,14 @@
 #version 430 core
 
 in vec4 fColor;
+in vec2 fTextureCoods;
 
 out vec4 color;
 
 uniform float uTime;
+uniform sampler2D tex1;
 
 void main()
 {
-    float noise = fract(sin(dot(fColor.xy, vec2(12.9898, 73.233))) * 43758.5453);
-    color = noise * fColor;
+    color = texture(tex1, fTextureCoods) * fColor;
 }
