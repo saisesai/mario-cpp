@@ -20,6 +20,11 @@ public:
 
 	static GLuint MakeShaderProgram(const char* shaderName);
 	static void UploadMatrix4f(GLuint shaderProgram, const char* varName, glm::mat4 mat4);
+	static void UploadMatrix3f(GLuint shaderProgram, const char* varName, glm::mat3 mat3);
+	static void UploadVector4f(GLuint shaderProgram, const char* varName, glm::vec4 vev4);
+	static void UploadVector3f(GLuint shaderProgram, const char* varName, glm::vec3 vec3);
+	static void UploadVector2f(GLuint shaderProgram, const char* varName, glm::vec2 vec2);
+	static void UploadFloat(GLuint shaderProgram, const char* varName, float var);
 
 private:
 	static string readShaderSrc(string shaderName, shaderType type);

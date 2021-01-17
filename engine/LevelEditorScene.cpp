@@ -4,6 +4,7 @@
 #include <glm/glm.hpp>
 
 #include "Window.h"
+#include "Timer.h"
 #include "ShaderManager.h"
 #include "KeyboardListener.h"
 
@@ -73,9 +74,11 @@ LevelEditorScene::~LevelEditorScene()
 void LevelEditorScene::Update(float dt)
 {
 	this->camera->Position.x -= dt * 50.0f;
+	this->camera->Position.y -= dt * 30.0f;
 
 	ShaderManager::UploadMatrix4f(this->shaderPorgram, "uProjection", this->camera->GetProjectionMatrix());
 	ShaderManager::UploadMatrix4f(this->shaderPorgram, "uView", this->camera->GetViewMatrix());
+	ShaderManager::UploadFloat(this->shaderPorgram, "uTime", Timer::GetInstance()->GetTime());
 
 	// Bind the VAO and EBO that we are using
 	// IMPORTANT bind VAO first!

@@ -108,3 +108,33 @@ void ShaderManager::UploadMatrix4f(GLuint shaderProgram, const char* varName ,gl
 	GLint varLocation = glGetUniformLocation(shaderProgram, varName);
 	glUniformMatrix4fv(varLocation, 1, GL_FALSE, glm::value_ptr(mat4));
 }
+
+void ShaderManager::UploadMatrix3f(GLuint shaderProgram, const char* varName, glm::mat3 mat3)
+{
+	GLint varLocation = glGetUniformLocation(shaderProgram, varName);
+	glUniformMatrix3fv(varLocation, 1, GL_FALSE, glm::value_ptr(mat3));
+}
+
+void ShaderManager::UploadVector4f(GLuint shaderProgram, const char* varName, glm::vec4 vec4)
+{
+	GLint varLocation = glGetUniformLocation(shaderProgram, varName);
+	glUniform4f(varLocation, vec4.x, vec4.y, vec4.z, vec4.w);
+}
+
+void ShaderManager::UploadVector3f(GLuint shaderProgram, const char* varName, glm::vec3 vec3)
+{
+	GLint varLocation = glGetUniformLocation(shaderProgram, varName);
+	glUniform3f(varLocation, vec3.x, vec3.y, vec3.z);
+}
+
+void ShaderManager::UploadVector2f(GLuint shaderProgram, const char* varName, glm::vec2 vec2)
+{
+	GLint varLocatrion = glGetUniformLocation(shaderProgram, varName);
+	glUniform2f(varLocatrion, vec2.x, vec2.y);
+}
+
+void ShaderManager::UploadFloat(GLuint shaderProgram, const char* varName, float var)
+{
+	GLint varLocation = glGetUniformLocation(shaderProgram, varName);
+	glUniform1f(varLocation, var);
+}
